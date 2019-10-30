@@ -5,40 +5,38 @@ struct node * linked_list() {
   l = NULL;
   return l;
 }
-void print_list(struct node * p) {
-  printf("\n[ ");
-  if (p != NULL) {
-    printf("%s: %s |", p->artist, p->name);
-    struct node n;
-    n = p;
-    while (n->next != NULL) {
-      n = n->next;
-      printf("%s: %s |", n->artist, n->name);
-    }
+void print_list(struct node * l){
+  if (!l){
+    printf("[ ]\n");
+    return;
   }
-  printf(" ]");
+  struct node *p = l -> next;
+  printf("[ ");
+  printf("%s : %s ", l -> artist, l -> name);
+  while (p){
+    printf("| %s : %s ", p -> artist, p -> name);
+    p = p -> next;
+  }
+  printf("]\n");
 }
 struct node * insert_front(struct node * p, char * a, char * n) {
   struct node * q = malloc(sizeof(struct node));
-  q->artist = a;
-  q->name = n;
+  strcpy(q->artist, a);
+  strcpy(q->name, n);
   q->next = p;
   return q;
 }
 struct node * insert(struct node * p, char * a, char * n) {
-  if (!p) insert_front(p, a, n);
-  if (strcmp(a, p->artist) < 0 && strcmp(n, p->name) < 0){
-    insert_front(p, a, n);
-    return;
-  }
+  if (!p) return insert_front(p, a, n);
+  if (strcmp(a, p->artist) <= 0 && strcmp(n, p->name) <= 0) return insert_front(p, a, n);
   struct node * l = p;
   struct node * l2 = p->next;
   struct node * q = malloc(sizeof(struct node));
-  q->artist = a;
-  q->name = n;
+  strcpy(q->artist, a);
+  strcpy(q->name, n);
   while (l2) {
     if (strcmp(a, l2->artist) == 0){
-      while (strcmp(n, l2->name) > 0) {
+      while (strcmp(n, l2->name) < 0) {
         l = l->next;
         l2 = l2->next;
       }
@@ -46,7 +44,7 @@ struct node * insert(struct node * p, char * a, char * n) {
       l->next = q;
       return p;
     }
-    if (strcmp(a, l2->artist) > 0){
+    if (strcmp(a, l2->artist) < 0){
       q->next = l2;
       l->next = q;
       return p;
@@ -94,31 +92,29 @@ struct node * random_song(struct node * p){
 struct node * free_list(struct node * p) {
   struct node * current;
   current = p->next;
-  if (current != NULL) {
-    printf("\nfreeing node: %s : %s", p->artist, p->name);
-    free_list(current);
-  }
+  if (current) free_list(current);
+  printf("freeing node: %s : %s\n", p->artist, p->name);
   free(p);
   p = NULL;
   return p;
 }
 struct node * rem(struct node *front, char * a, char * n) {
-  struct node * current;
-  current = front->next;
+  struct node * current = front->next;
   if (strcmp(front->artist, a) == 0 && strcmp(front->name, n) == 0) {
     free(front);
     front = NULL;
     return current;
   }
-  while (current != NULL) {
-    if (strcmp(front->artist, a) == 0 && strcmp(front->name, n) == 0) {
-      front->next = current->next;
+  struct node * previous = front;
+  while (current) {
+    if (strcmp(current->artist, a) == 0 && strcmp(current->name, n) == 0) {
+      previous->next = current->next;
       free(current);
       current = NULL;
       return front;
     }
-    else rem(current, a, n);
-    return front;
+    previous = previous-> next;
+    current = current->next;
   }
   return front;
 }
