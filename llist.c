@@ -93,6 +93,7 @@ struct node * random_song(struct node * p){
   return temp;
 }
 struct node * free_list(struct node * p) {
+  if (!p) return p;
   struct node * current;
   current = p->next;
   if (current) free_list(current);
