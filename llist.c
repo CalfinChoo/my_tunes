@@ -19,6 +19,9 @@ void print_list(struct node * l){
   }
   printf("]\n");
 }
+void print_node(struct node * p) {
+  printf("[ %s : %s ]\n", p->artist, p->name);
+}
 struct node * insert_front(struct node * p, char * a, char * n) {
   struct node * q = malloc(sizeof(struct node));
   strcpy(q->artist, a);
@@ -56,7 +59,7 @@ struct node * insert(struct node * p, char * a, char * n) {
   q->next = NULL;
   return p;
 }
-struct node * song(struct node * p, char * a, char * n){
+struct node * find_node(struct node * p, char * a, char * n){
   struct node * temp = p;
   while (temp){
     if (strcmp(a, temp->artist) == 0 && strcmp(n, temp->name) == 0) return temp;
