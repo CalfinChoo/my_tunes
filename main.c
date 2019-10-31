@@ -5,7 +5,7 @@ int main() {
   srand(time(NULL));
   printf("LINKED LIST TESTS\n====================================\n");
 
-  printf("\nTesting print_list on empty list:\n");
+  printf("Testing print_list on empty list:\n");
   print_list(list);
 
   printf("\nTesting insert(node):\n");
@@ -43,18 +43,34 @@ int main() {
   struct node * findTest = find_node(list, "Mozart", "Eine kleine Nachtmusik");
   if (findTest) {
     printf("NODE FOUND >> ");
-    print_list(findTest);
+    print_node(findTest);
   }
   else printf("NODE NOT FOUND\n");
-  printf("\nTesting print_node on found node:\n\n");
-  print_node(findTest);
-  printf("\nFinding node [Scott Joplin : The Entertainer] (which doesn't exist).\n");
-  findTest = find_node(list, "Scott Joplin", "The Entertainer");
+  printf("\nFinding node [Beethoven : Symphony No.5 in C minor].\n");
+  findTest = find_node(list, "Beethoven", "Symphony No.5 in C minor");
   if (findTest) {
     printf("NODE FOUND >> ");
     print_list(findTest);
   }
   else printf("NODE NOT FOUND\n");
+  printf("\nFinding node [Scott Joplin : The Entertainer] (which doesn't exist).\n");
+  findTest = find_node(list, "Scott Joplin", "The Entertainer");
+  if (findTest) {
+    printf("NODE FOUND >> ");
+    print_node(findTest);
+  }
+  else printf("NODE NOT FOUND\n");
+
+  printf("\n======================================================================================\n");
+
+  printf("Testing find_artist:\n");
+  printf("\nFinding artist Beethoven.\n");
+  findTest = find_artist(list, "Beethoven");
+  if (findTest) {
+    printf("ARTIST FOUND >> ");
+    print_list(findTest);
+  }
+  else printf("ARTIST NOT FOUND\n");
 
   printf("\n======================================================================================\n");
 

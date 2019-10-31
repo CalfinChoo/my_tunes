@@ -18,7 +18,7 @@ void print_node(struct node * p);
 struct node * insert_front(struct node * p, char * a, char * n);
 struct node * insert(struct node * p, char * a, char * n);
 struct node * find_node(struct node * p, char * a, char * n);
-struct node * artist(struct node * p, char * a);
+struct node * find_artist(struct node * p, char * a);
 int size(struct node * p);
 struct node * random_song(struct node * p);
 struct node * rem(struct node *front, char * a, char * n);

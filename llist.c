@@ -67,7 +67,7 @@ struct node * find_node(struct node * p, char * a, char * n){
   }
   return NULL;
 }
-struct node * artist(struct node * p, char * a){
+struct node * find_artist(struct node * p, char * a){
   struct node * temp = p;
   while (temp){
     if (strcmp(a, temp->artist) == 0) return temp;
