@@ -36,7 +36,7 @@ struct node * insert(struct node * p, char * a, char * n) {
   strcpy(q->name, n);
   while (l2) {
     if (strcmp(a, l2->artist) == 0){
-      while (strcmp(n, l2->name) < 0) {
+      while (strcmp(n, l2->name) > 0) {
         l = l->next;
         l2 = l2->next;
       }
