@@ -31,6 +31,7 @@ struct node * insert_front(struct node * p, char * a, char * n) {
 }
 struct node * insert(struct node * p, char * a, char * n) {
   if (!p) return insert_front(p, a, n);
+  if (strcmp(a, p->artist) < 0) return insert_front(p, a, n);
   if (strcmp(a, p->artist) <= 0 && strcmp(n, p->name) <= 0) return insert_front(p, a, n);
   struct node * l = p;
   struct node * l2 = p->next;
@@ -39,7 +40,7 @@ struct node * insert(struct node * p, char * a, char * n) {
   strcpy(q->name, n);
   while (l2) {
     if (strcmp(a, l2->artist) == 0){
-      while (strcmp(n, l2->name) > 0) {
+      while (l2 && strcmp(a, l2->artist) == 0 && strcmp(n, l2->name) > 0) {
         l = l->next;
         l2 = l2->next;
       }

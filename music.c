@@ -4,10 +4,10 @@ void add_song(char * a, char * n) {
   char c = *a;
   int x = c - 'A';
   if (0 <= x && x < 26){
-    insert(lib[x], a, n);
+    lib[x] = insert(lib[x], a, n);
   }
   else{
-    insert(lib[26], a, n);
+    lib[26] = insert(lib[26], a, n);
   }
 }
 
@@ -71,7 +71,10 @@ void shuffle(int x){
         y--;
         temp = temp->next;
       }
-      if (y == 0) print_node(temp);
+      if (temp && y == 0){
+        print_node(temp);
+        break;
+      }
     }
   }
 }
@@ -80,10 +83,10 @@ void del(char * a, char * n){
   char c = *a;
   int x = c - 'A';
   if (0 <= x && x < 26){
-    rem(lib[x], a, n);
+    lib[x] = rem(lib[x], a, n);
   }
   else{
-    rem(lib[26], a, n);
+    lib[26] = rem(lib[26], a, n);
   }
 }
 
